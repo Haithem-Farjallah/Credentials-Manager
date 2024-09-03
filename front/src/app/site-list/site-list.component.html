@@ -1,0 +1,136 @@
+<div class="container mx-auto my-16">
+  <h1 class="text-5xl mt-0 mb-5">You Web App Password Manager</h1>
+  <p class="mb-5">
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit ea nemo
+    blanditiis aliquid eligendi in natus ratione a incidunt dolore.
+  </p>
+  <button
+    (click)="addSite()"
+    class="mb-5 mx-0.5 px-5 py-3 text-sm bg-gray-900 text-white shadow rounded-md"
+  >
+    Add new Site
+  </button>
+  <div *ngIf="showForm" class="px-20 py-10 mb-10 my-5 border-4 border-gray-900">
+    <h2 class="text-3xl text-center">{{ formTitle }} Site</h2>
+    <p class="text-center">You can {{ formTitle }} site from the form below</p>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div class="flex flex-col">
+        <label class="text-lg font-medium mb-2">Site name :</label>
+        <input
+          [(ngModel)]="value.siteName"
+          ngModel
+          type="text"
+          name="siteName"
+          class="border-2 border-gray-900 rounded-lg p-2 w-full"
+          required
+          #siteName="ngModel"
+        /><span
+          class="text-sm text-red-400 py-0.5"
+          *ngIf="!siteName.valid && siteName.touched"
+          >This field is required !
+        </span>
+      </div>
+      <div class="flex flex-col">
+        <label class="text-lg font-medium mb-2">Site Url :</label>
+        <input
+          [(ngModel)]="value.siteUrl"
+          ngModel
+          type="text"
+          name="siteUrl"
+          class="border-2 border-gray-900 rounded-lg p-2 w-full"
+          required
+          pattern="https?://.*"
+          #siteUrl="ngModel"
+        />
+        <div
+          class="text-sm text-red-400 py-0.5"
+          *ngIf="siteUrl.invalid && siteUrl.touched"
+        >
+          <span *ngIf="siteUrl.errors?.['required']"
+            >This field is required!</span
+          >
+          <span
+            *ngIf="siteUrl.errors?.['pattern'] && !siteUrl.errors?.['required']"
+            >Please enter a valid URL!</span
+          >
+        </div>
+      </div>
+      <div class="flex flex-col">
+        <label class="text-lg font-medium mb-2">Image Url :</label>
+        <input
+          [(ngModel)]="value.siteImgUrl"
+          ngModel
+          type="text"
+          name="siteImgUrl"
+          class="border-2 border-gray-900 rounded-lg p-2 w-full"
+          required
+          pattern="https?://.*"
+          #siteImgUrl="ngModel"
+        />
+        <div
+          class="text-sm text-red-400 py-0.5"
+          *ngIf="siteImgUrl.invalid && siteImgUrl.touched"
+        >
+          <span *ngIf="siteImgUrl.errors?.['required']">
+            this Field is reuired !
+          </span>
+
+          <span
+            *ngIf="siteImgUrl.errors?.['pattern'] && !siteImgUrl.errors?.['required']"
+          >
+            Please enter a valid url !
+          </span>
+        </div>
+      </div>
+      <button
+        [disabled]="!f.valid"
+        class="disabled:opacity-50 mt-10 mx-0.5 px-5 py-3 text-sm bg-gray-900 text-white shadow rounded-md"
+      >
+        {{ formTitle }} Site
+      </button>
+      <button
+        type="button"
+        (click)="cancelForm()"
+        class="mt-10 mx-0.5 px-5 py-3 text-sm border border-gray-900 text-gray-900 shadow rounded-md"
+      >
+        Cancel
+      </button>
+    </form>
+  </div>
+  <div class="grid grid-cols-4 gap-5">
+    <div
+      *ngFor="let site of Sites"
+      class="relative shadow-lg border-2 border-gray-900"
+    >
+      <img
+        class="w-full object-cover h-40"
+        [src]="site.siteImgUrl"
+        alt="Site logo"
+      />
+      <a [routerLink]="['/site', site._id]" class="p-3 text-xl font-bold">{{
+        site.siteName
+      }}</a>
+      <div class="w-60 m-3 px-3 bg-blue-200 text-blue-800 rounded-lg text-sm">
+        {{ site.siteUrl }}
+      </div>
+
+      <button
+        class="my-2 ml-2 border mx-0.5 px-5 py-3 bg-gray-900 text-sm text-white shadow rounded-md"
+      >
+        Add Password
+      </button>
+      <button
+        (click)="loadData(site)"
+        class="my-3 mx-0.5 px-5 py-3 text-sm border-2 border-gray-900 text-gray-900 shadow rounded-md"
+      >
+        Edit
+      </button>
+      <button
+        (click)="handleDelete(site._id)"
+        class="my-3 mx-0.5 px-5 py-3 text-sm border-2 border-gray-900 text-gray-900 shadow rounded-md"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
