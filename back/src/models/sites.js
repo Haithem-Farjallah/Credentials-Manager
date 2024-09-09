@@ -5,16 +5,18 @@ const siteSchema = mongoose.Schema(
     siteName: {
       type: String,
       required: true,
-      unique: true,
     },
     siteUrl: {
       type: String,
       required: true,
-      unique: true,
     },
     siteImgUrl: {
       type: String,
       required: true,
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   { timestamps: true }

@@ -36,11 +36,7 @@ export class ManagerService {
   }
 
   onCreateSite(form: NgForm): Observable<any> {
-    return this.http.post(`${this.apiUrl}/site/`, form.value, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    return this.http.post(`${this.apiUrl}/site/`, form.value);
   }
   getSites(): Observable<any> {
     return this.http.get(`${this.apiUrl}/site/`);
@@ -49,11 +45,7 @@ export class ManagerService {
     return this.http.delete(`${this.apiUrl}/site/${id}`);
   }
   updateSite(form: NgForm, id: number): Observable<any> {
-    return this.http.put(`${this.apiUrl}/site/${id}`, form.value, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    return this.http.put(`${this.apiUrl}/site/${id}`, form.value);
   }
   getSingleSite(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/site/${id}`);

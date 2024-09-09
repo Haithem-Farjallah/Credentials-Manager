@@ -63,7 +63,8 @@ export class SiteListComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    if (this.formTitle === 'Add') {
+    if (this.formTitle == 'Add') {
+      console.log(form.value);
       this.managerService.onCreateSite(form).subscribe({
         next: () => {
           this.getSites();
@@ -72,6 +73,7 @@ export class SiteListComponent implements OnInit {
           this.cancelForm();
         },
         error: (e) => {
+          console.log(e);
           this.toastr.error('Something Went wrong !', '', {
             closeButton: true,
             timeOut: 3000,
@@ -79,7 +81,7 @@ export class SiteListComponent implements OnInit {
           });
         },
       });
-    } else if (this.formTitle === 'Update ') {
+    } else if (this.formTitle == 'Update') {
       if (this.value.id !== null) {
         this.managerService.updateSite(form, this.value.id).subscribe({
           next: () => {
@@ -100,7 +102,7 @@ export class SiteListComponent implements OnInit {
     }
   }
   loadData(site: any) {
-    this.formTitle = 'Update ';
+    this.formTitle = 'Update';
     this.addSite();
     this.value = {
       siteImgUrl: site.siteImgUrl,

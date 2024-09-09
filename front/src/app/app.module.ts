@@ -17,6 +17,7 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { authInterceptor } from './auth.interceptor';
+import { RegisterComponent } from './register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +25,7 @@ import { authInterceptor } from './auth.interceptor';
     SiteListComponent,
     ListItemComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

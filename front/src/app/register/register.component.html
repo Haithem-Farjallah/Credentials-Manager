@@ -1,0 +1,89 @@
+<section class="bg-gray-50">
+  <div
+    class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen"
+  >
+    <div
+      class="w-full border-4 border-gray-900 bg-white rounded-lg shadow max-w-md"
+    >
+      <div class="p-6 space-y-6">
+        <h1 class="text-2xl font-bold text-gray-900">Log in to your account</h1>
+        <form class="space-y-6" (ngSubmit)="onSubmit(f)" #f="ngForm">
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-900">
+              Your email
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="name@example.com"
+              class="block w-full p-2.5 text-sm border-2 border-gray-900 rounded-lg"
+              ngModel
+              email
+              required
+              #email="ngModel"
+            />
+            <div *ngIf="email.invalid && email.touched">
+              <small
+                class="text-sm text-red-400 py-0.5"
+                *ngIf="email.errors?.['required']"
+                >Email is required.</small
+              >
+              <small
+                class="text-sm text-red-400 py-0.5"
+                *ngIf="email.errors?.['email']"
+                >Please enter a valid email address.</small
+              >
+            </div>
+          </div>
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-900">
+              Your Username
+            </label>
+            <input
+              type="text"
+              name="username"
+              class="block w-full p-2.5 text-sm border-2 border-gray-900 rounded-lg"
+              ngModel
+              required
+              #username="ngModel"
+            />
+            <div *ngIf="username.invalid && username.touched">
+              <small
+                class="text-sm text-red-400 py-0.5"
+                *ngIf="username.errors?.['required']"
+                >username is required.</small
+              >
+            </div>
+          </div>
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-900">
+              Your password
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="********"
+              class="block w-full p-2.5 text-sm border-2 border-gray-900 rounded-lg"
+              ngModel
+              required
+              #password="ngModel"
+            />
+            <div *ngIf="password.invalid && password.touched">
+              <small
+                class="text-sm text-red-400 py-0.5"
+                *ngIf="password.errors?.['required']"
+                >Password is required.</small
+              >
+            </div>
+          </div>
+          <button
+            [disabled]="!f.valid"
+            class="w-full text-white disabled:bg-gray-600 bg-gray-800 hover:bg-gray-900 rounded font-medium text-sm px-5 py-2.5 text-center"
+          >
+            Log In
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -11,6 +11,7 @@ export const createSiteController = async (req, res) => {
       siteName,
       siteUrl,
       siteImgUrl,
+      userId: req.user,
     });
     await newSite.save();
     res.status(201).json({ message: "Site created successfully" });
@@ -24,7 +25,7 @@ export const createSiteController = async (req, res) => {
 
 export const getSitesController = async (req, res) => {
   try {
-    const sites = await Site.find();
+    const sites = await Site.find({ userId: req.user });
     res.status(200).json(sites);
   } catch (error) {
     console.error(error);
@@ -35,7 +36,6 @@ export const getSitesController = async (req, res) => {
 export const deleteSiteController = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const site = await Site.findByIdAndDelete(id);
     if (!site) {
       return res.status(404).json({ message: "Site not found" });

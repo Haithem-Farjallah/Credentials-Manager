@@ -5,12 +5,17 @@ import { ListItemComponent } from './site-list/list-item/list-item.component';
 import { SiteResolver } from './site-list/site-Resolver.service';
 import { LoginComponent } from './login/login.component';
 import { authGuard } from './auth.guard';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'sites', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
   {
     path: 'sites',

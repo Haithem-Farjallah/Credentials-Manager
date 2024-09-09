@@ -13,7 +13,7 @@ export const authInterceptor: HttpInterceptorFn = (
   // Inject AuthService at runtime inside the interceptor function
   const auth = inject(AuthService);
 
-  if (!req.url.includes('/login')) {
+  if (!req.url.includes('/login') || !req.url.includes('/register')) {
     const token = auth.getToken();
     let modifiedRequest = req;
     if (token) {
