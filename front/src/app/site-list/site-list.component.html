@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="container mx-auto my-16">
   <h1 class="text-5xl mt-0 mb-5">You Web App Password Manager</h1>
   <p class="mb-5">
@@ -115,6 +116,7 @@
       </div>
 
       <button
+        [routerLink]="['/site', site._id]"
         class="my-2 ml-2 border mx-0.5 px-5 py-3 bg-gray-900 text-sm text-white shadow rounded-md"
       >
         Add Password

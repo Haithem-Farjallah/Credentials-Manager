@@ -31,7 +31,6 @@ export class SiteListComponent implements OnInit {
     this.managerService.getSites().subscribe({
       next: (data) => {
         this.Sites = data;
-        console.log(data);
       },
       error: () => {
         this.toastr.error('Something Went wrong !', '', {

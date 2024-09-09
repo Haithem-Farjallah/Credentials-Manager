@@ -8,9 +8,15 @@ import { SiteListComponent } from './site-list/site-list.component';
 import { ListItemComponent } from './site-list/list-item/list-item.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideHttpClient } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptors,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { authInterceptor } from './auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +34,7 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot(),
     SweetAlert2Module.forRoot(),
   ],
-  providers: [provideHttpClient()], // add it here
+  providers: [provideHttpClient(withInterceptors([authInterceptor]))],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

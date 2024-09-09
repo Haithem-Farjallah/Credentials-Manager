@@ -5,16 +5,20 @@ import { FormGroup, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import CryptoJS from 'crypto-js';
+import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
 export class ManagerService {
-  constructor(private http: HttpClient, private toastr: ToastrService) {}
+  constructor(
+    private http: HttpClient,
+    private toastr: ToastrService,
+    private auth: AuthService
+  ) {}
   private apiUrl = environment.apiUrl;
   private key = environment.key;
-
-  showError() {
-    this.toastr.error('Something Went wrong !', '', {
+  showError(error?: string) {
+    this.toastr.error(error || 'Something Went wrong !', '', {
       closeButton: true,
       timeOut: 3000,
       progressBar: true,
