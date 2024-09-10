@@ -120,13 +120,21 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="h-14" *ngFor="let credentail of credentials">
+        <tr class="h-14" *ngFor="let credentail of credentials; let i = index">
           <td class="border-2 border-gray-900 p-3">{{ credentail.email }}</td>
           <td class="border-2 border-gray-900 p-3">
             {{ credentail.username }}
           </td>
           <td class="border-2 border-gray-900 p-3">
-            {{ credentail.password }}
+            <div class="flex items-center justify-between">
+              {{ credentail.password }}
+              <button
+                class="mx-0.5 px-5 py-3 text-sm bg-gray-900 text-white shadow rounded-md"
+                (click)="handleEncryption(credentail.password, i)"
+              >
+                {{ showPasswords[i] ? "Hide" : "Show" }}
+              </button>
+            </div>
           </td>
           <td class="border-2 border-gray-900 p-3">
             <button

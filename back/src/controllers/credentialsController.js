@@ -4,6 +4,7 @@ import CryptoJS from "crypto-js";
 export const addCredentialsController = async (req, res) => {
   try {
     const { email, username, password, siteId } = req.body;
+    console.log(req.body);
     if (!email || !username || !password || !siteId) {
       return res.status(400).json({ message: "All fields are required" });
     }

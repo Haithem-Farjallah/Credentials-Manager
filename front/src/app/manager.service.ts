@@ -34,6 +34,9 @@ export class ManagerService {
   decrypt(str: string) {
     return CryptoJS.AES.decrypt(str, this.key).toString(CryptoJS.enc.Utf8);
   }
+  encrypt(str: string) {
+    return CryptoJS.AES.encrypt(str, this.key).toString();
+  }
 
   onCreateSite(form: NgForm): Observable<any> {
     return this.http.post(`${this.apiUrl}/site/`, form.value);

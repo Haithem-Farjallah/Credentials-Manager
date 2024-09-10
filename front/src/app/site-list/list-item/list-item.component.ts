@@ -10,9 +10,10 @@ import { ManagerService } from '../../manager.service';
 })
 export class ListItemComponent implements OnInit {
   singleSite: any;
-  credentials = null;
+  credentials!: any[];
   signupForm: FormGroup;
   formType: string = 'Add';
+  showPasswords: boolean[] = [];
   Value = {
     email: '',
     username: '',
@@ -28,7 +29,7 @@ export class ListItemComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       username: ['', Validators.required],
       password: ['', Validators.required],
-      siteId: [this.route.snapshot.params['id']],
+      siteId: [''],
     });
     this.getCredentials();
   }
@@ -64,10 +65,24 @@ export class ListItemComponent implements OnInit {
       behavior: 'smooth',
     });
   }
+  handleEncryption(value: string, index: number) {
+    if (this.showPasswords[index]) {
+      // If password is shown, encrypt it again and hide it
+      this.credentials[index].password = this.managerService.encrypt(value);
+      this.showPasswords[index] = false; // Hide the password
+    } else {
+      // If password is hidden, decrypt it and show it
+      this.credentials[index].password = this.managerService.decrypt(value);
+      this.showPasswords[index] = true; // Show the password
+    }
+  }
   //Add new Credentials :
   onSubmit() {
     if (this.signupForm.valid) {
       if (this.formType === 'Add') {
+        this.signupForm.patchValue({
+          siteId: this.route.snapshot.params['id'],
+        });
         this.managerService.addCredentials(this.signupForm.value).subscribe({
           next: () => {
             this.getCredentials();
@@ -86,7 +101,7 @@ export class ListItemComponent implements OnInit {
       console.log('Form is invalid');
     }
   }
-
+  //returns all the credentials of the  current user
   getCredentials() {
     this.managerService
       .getCredentials(this.route.snapshot.params['id'])
