@@ -69,7 +69,7 @@ export const updateCredentialsController = async (req, res) => {
     await Credentials.findByIdAndUpdate(id, {
       email,
       username,
-      password,
+      password: CryptoJS.AES.encrypt(password, process.env.KEY).toString(),
     });
     return res
       .status(200)
