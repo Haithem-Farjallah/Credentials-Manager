@@ -5,7 +5,7 @@
     <div
       class="w-full border-4 border-gray-900 bg-white rounded-lg shadow max-w-md"
     >
-      <div class="p-6 space-y-6">
+      <div class="p-6 space-y-4">
         <h1 class="text-2xl font-bold text-gray-900">Log in to your account</h1>
         <form class="space-y-6" (ngSubmit)="onSubmit(f)" #f="ngForm">
           <div>
@@ -76,11 +76,19 @@
               >
             </div>
           </div>
+          <div class="flex justify-end">
+            <p
+              routerLink="/login"
+              class="text-right cursor-pointer font-semibold text-gray-900 text-sm hover:underline"
+            >
+              Log In
+            </p>
+          </div>
           <button
             [disabled]="!f.valid"
             class="w-full text-white disabled:bg-gray-600 bg-gray-800 hover:bg-gray-900 rounded font-medium text-sm px-5 py-2.5 text-center"
           >
-            Log In
+            Create an account
           </button>
         </form>
       </div>
