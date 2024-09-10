@@ -29,7 +29,7 @@ npm install
 ```
 3. Install client-side dependencies:
 ```bash
-cd ../frontend
+cd ../front
 npm install
 ```
 
